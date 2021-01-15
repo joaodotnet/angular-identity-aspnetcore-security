@@ -1,7 +1,9 @@
 ﻿using Contracts;
 using Entities;
+using Entities.Models;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +37,10 @@ namespace CompanyEmployees.Extensions
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
            services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+        public static void ConfigureIdentity(this IServiceCollection services) =>
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<RepositoryContext>();
 
     }
 }
